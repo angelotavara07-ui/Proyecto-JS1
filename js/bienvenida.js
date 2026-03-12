@@ -1,0 +1,6 @@
+let nombre = prompt("Por favor, ingresa tu nombre:");
+let edad = prompt("Por favor, ingresa tu edad:");
+
+alert("El usuario " + nombre + " Tiene " + edad + " años.");
+
+document.write("El usuario " + nombre + " Tiene " + edad + " años.");
