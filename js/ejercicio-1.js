@@ -15,6 +15,6 @@ function registrar (){
     console.log("El nombre registrado en consola es: " + nombre);
 
 // 3. Mostrar todo en el DOM (Fase 3: FASE DE SALIDA: Donde se muestra en pantalla o consola el resultado de todas las fases previas. Ejemplo: Hola bienvenido a mi pagina)
-    mensaje.textContent= "¡Hola, " + nombre + " Bienvenido al curso";
+    mensaje.textContent= "¡Hola, " + nombre + " Bienvenido al curso!";
 
 }
