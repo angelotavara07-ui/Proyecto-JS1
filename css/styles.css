@@ -1,0 +1,85 @@
+/* VARIABLES CSS - PALETA DE COLORES */
+/* SELECTOR PADRE */
+:root {
+    
+        --colorPrimario: #1E3A8A;   
+        --colorSecundario: #22C55E; 
+        --colorTerciario: #E5E7EB;
+        --colorSombras: rgba(0, 0, 0, 0.15);
+        --colorTitulos: #111827;
+        --colorParrafos: #4B5563;
+        --colorFondo: #F9FAFB;
+        --colorBordes: #E5E7EB;
+        --zIndexNormal: 1;
+        --zIndexToolTip: 10;
+        --zIndexFixed: 100;
+        --zIndexModal: 1000;
+        --zIndexPopUp: 10000;
+}
+/* SELECTOR UNIVERSAL */
+*{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+}
+
+
+body{
+    display: flex;
+    font-family: 'Courier New', Courier, monospace;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-items: center;
+    margin: 20px;
+    background-color: var(--colorTerciario);
+}
+.titulo{
+    color: var(--colorTitulos);
+    font-size: 2.5rem;
+    align-self: center;
+    text-align: center;
+    text-decoration: underline;
+
+}
+.input1{
+    padding: 10px;
+    border: 1px solid var(--colorBordes);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.button1{
+    background-color: var(--colorPrimario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.button2{
+    background-color: var(--colorPrimario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: fit-content;  
+    margin: 0 auto;       
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    max-width: 400px;
+    margin: 0 auto; 
+    padding: 20px;
+    background: var(--colorSecundario);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--colorSombras);
+    display: flex;
+    align-items: center; 
+    
+}
+
+
