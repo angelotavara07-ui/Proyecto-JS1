@@ -1,5 +1,5 @@
 <?php
-// Indicar que la respuesta será en formato JSON
+
 header('Content-Type: application/json');
 
 // Credenciales de la Base de Datos
@@ -18,7 +18,7 @@ try {
     $passwordIngresada = $_POST['pass'] ?? '';
 
     // Preparar la consulta SQL para buscar al usuario
-    $sql = "SELECT id, password_hash FROM usuario WHERE username = :usuario LIMIT 1";
+    $sql = "SELECT id, username, password_hash FROM usuario WHERE username = :usuario LIMIT 1";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':usuario', $usuarioIngresado);
     $stmt->execute();
@@ -31,6 +31,8 @@ try {
         // Iniciar sesión en PHP (opcional pero recomendado para mantener el estado)
         session_start();
         $_SESSION['usuario_id'] = $usuarioFila['id'];
+
+        $_SESSION['username'] = $usuarioFila['username'];
 
         echo json_encode([
             "exito" => true,

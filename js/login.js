@@ -41,7 +41,7 @@ $(document).ready(function () {
             timer: 2000,
           }).then(() => {
 
-            window.location.href = "dashboard.html";
+            window.location.href = "dashboard2.html";
 
           });
 
