@@ -12,6 +12,134 @@ $(document).ready(function () {
         }
     });
 
+    $(document).ready(function () {
+
+        let chartGenero = null;
+        let chartNiveles = null;
+        
+        /* ========================================================
+        NAVEGACIÓN SPA
+        ======================================================== */
+        $('.sidebar-nav li').on('click', function (e) {
+            e.preventDefault();
+        
+            $('.sidebar-nav li').removeClass('active');
+            $(this).addClass('active');
+        
+            let modulo = $(this).data('modulo');
+        
+            if (modulo === 'dashboard') {
+                $('#moduloEstudiantes').hide();
+                $('#moduloDashboard').fadeIn();
+                cargarDatosDashboard();
+            } 
+            else if (modulo === 'estudiantes') {
+                $('#moduloDashboard').hide();
+                $('#moduloEstudiantes').fadeIn();
+                cargarAlumnos();
+            }
+            else if (modulo === 'cursos') {
+                $('#moduloDashboard').hide();
+                $('#moduloEstudiantes').fadeIn();
+                cargarCursos();
+            }  
+            else if (modulo === 'pagos') {
+                $('#moduloDashboard').hide();
+                $('#moduloReserva').fadeIn();
+                cargarReservas();
+            } 
+            else {
+                $('#moduloDashboard').hide();
+                $('#moduloEstudiantes').hide();
+                Swal.fire('Módulo en Desarrollo', '', 'info');
+            }
+        });
+        
+        /* ========================================================
+        CARGAR DASHBOARD
+        ======================================================== */
+        function cargarDatosDashboard() {
+            fetch('php/dashboard_datos.php')
+                .then(res => res.json())
+                .then(data => {
+        
+                    if (!data.exito) return;
+        
+                    let d = data.datos;
+        
+                    // KPIs
+                    $('#kpiTotalAlumnos').text(d.kpis.totalAlumnos);
+                    $('#kpiTotalAulas').text(d.kpis.totalAulas);
+                    $('#kpiVacantesDisp').text(d.kpis.vacantesDisp);
+        
+                    // GENERO
+                    let etiquetasGenero = d.graficos.genero.map(g => g.GENERO);
+                    let datosGenero = d.graficos.genero.map(g => g.cantidad);
+        
+                    dibujarGraficoGenero(etiquetasGenero, datosGenero);
+        
+                    // NIVELES
+                    let etiquetas = d.graficos.niveles.map(n => n.NIVEL);
+                    let totales = d.graficos.niveles.map(n => n.totales);
+                    let disponibles = d.graficos.niveles.map(n => n.disponibles);
+        
+                    dibujarGraficoNiveles(etiquetas, totales, disponibles);
+                });
+        }
+        
+        /* ========================================================
+        GRÁFICOS
+        ======================================================== */
+        function dibujarGraficoGenero(etiquetas, datos) {
+        
+            let canvas = document.getElementById('graficoGenero');
+            if (!canvas) return;
+        
+            let ctx = canvas.getContext('2d');
+        
+            if (chartGenero) chartGenero.destroy();
+        
+            chartGenero = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: etiquetas,
+                    datasets: [{
+                        data: datos,
+                        backgroundColor: ['#3498DB', '#E74C3C', '#F1C40F']
+                    }]
+                }
+            });
+        }
+        
+        function dibujarGraficoNiveles(etiquetas, totales, disponibles) {
+        
+            let canvas = document.getElementById('graficoNiveles');
+            if (!canvas) return;
+        
+            let ctx = canvas.getContext('2d');
+        
+            if (chartNiveles) chartNiveles.destroy();
+        
+            chartNiveles = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    
+                    labels: etiquetas,
+                    datasets: [
+                        {
+                            label: 'Totales',
+                            data: totales
+                        },
+                        {
+                            label: 'Disponibles',
+                            data: disponibles
+                        }
+                    ]
+                }
+            });
+        }
+        
+        });
 
     // 1. ABRIR MODAL PARA NUEVO REGISTRO
     $('#btnNuevo').on('click', function () {
@@ -229,6 +357,88 @@ $(document).ready(function () {
         });
     }
 
+
+
+
     cargarAlumnos();
+
+    
+// --- FUNCIONES AUXILIARES PARA DIBUJAR ---
+function dibujarGraficoGenero(etiquetas, datos) {
+    let ctx =
+    document.getElementById('graficoGenero').getContext('2d');
+    // Destruir gráfico anterior si existe (evita superposición al cambiar de pestaña)
+    if (chartGenero) { chartGenero.destroy(); }
+    chartGenero = new Chart(ctx, {
+    type: 'doughnut', // Gráfico circular tipo "Dona"
+    data: {
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        },
+    labels: etiquetas,
+    datasets: [{
+    data: datos,
+    backgroundColor: ['#3498DB', '#E74C3C', '#F1C40F'],
+    
+    
+    // Colores corporativos
+    
+    borderWidth: 2,
+    hoverOffset: 4
+    }]
+    },
+    options: {
+        responsive: true,
+    maintainAspectRatio: false, // Permite que se adapte a nuestro CSS
+    
+    plugins: {
+    legend: { position: 'bottom' }
+    }
+    }
+    });
+    }
+    function dibujarGraficoNiveles(etiquetas, totales, disponibles) {
+    let ctx =
+    document.getElementById('graficoNiveles').getContext('2d');
+    if (chartNiveles) { chartNiveles.destroy(); }
+    chartNiveles = new Chart(ctx, {
+    type: 'bar', // Gráfico de barras
+    data: {
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        },
+    labels: etiquetas,
+    datasets: [
+    {
+    label: 'Vacantes Totales',
+    data: totales,
+    backgroundColor: '#95A5A6', // Gris
+    borderRadius: 4
+    },
+    {
+    label: 'Vacantes Disponibles',
+    data: disponibles,
+    backgroundColor: '#2ECC71', // Verde
+    borderRadius: 4
+    }
+    ]
+    },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+    y: { beginAtZero: true }
+    }
+    }
+    });
+    }
 
 });

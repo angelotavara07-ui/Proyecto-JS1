@@ -88,35 +88,39 @@
                 </div>
             </header>
             <div class="content-body">
-                <div class="card table-card">
-                    <div class="card-header">
-                        <h2>Reservas Registradas</h2>
+                <div id="moduloReserva">
 
-                        <button id="btnNuevaReserva" class="btn btn-primary"><i class="fa-solid fa-plus"></i>
-                            Registrar Nuevo</button>
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h2>Reservas Registradas</h2>
 
+                            <button id="btnNuevaReserva" class="btn btn-primary"><i class="fa-solid fa-plus"></i>
+                                Registrar Nuevo</button>
+
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Alumno</th>
+                                    <th>ID Aula</th>
+                                    <th>Código Pago</th>
+                                    <th>Fecha Reserva</th>
+                                    <th>Estado Pago</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaReservas">
+                            </tbody>
+
+                        </table>
+
+                        <div class="card-footer">
+                            <p>Mostrando 2 de 50 registros</p>
+                        </div>
                     </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>ID Alumno</th>
-                                <th>ID Aula</th>
-                                <th>Código Pago</th>
-                                <th>Fecha Reserva</th>
-                                <th>Estado Pago</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
 
-                        <tbody id="tablaReservas">
-                        </tbody>
-
-                    </table>
-
-                    <div class="card-footer">
-                        <p>Mostrando 2 de 50 registros</p>
-                    </div>
                 </div>
             </div>
         </main>
