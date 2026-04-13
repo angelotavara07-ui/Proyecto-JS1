@@ -135,7 +135,7 @@ $(document).ready(function () {
         $('#correo').val(correo);
         $('#apoderado').val(apoderado);
         $('#cel_apoderado').val(cel_apoderado);
-        $('#username').val(username);
+        $('#usernameAlumno').val(username);
 
         // ✅ CAMBIO 1
         if (estado == "Activo") {

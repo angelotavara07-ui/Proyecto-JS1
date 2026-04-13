@@ -73,7 +73,6 @@ body {
 .containers {
     display: flex;
     min-height: 100vh;
-    /* Ocupar toda la altura de la pantalla */
 }
 
 /* ========================================= 
@@ -86,7 +85,6 @@ body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    /* Fija a la izquierda */
     height: 100%;
 }
 
@@ -172,7 +170,6 @@ body {
 .main-content {
     flex: 1;
     margin-left: 260px;
-    /* Compensar la barra lateral fija */
     display: flex;
     flex-direction: column;
 }
@@ -353,10 +350,7 @@ body {
     height: 100%;
 
     background: var(--overlay-strong);
-    /* más elegante */
     backdrop-filter: blur(4px);
-    /* efecto moderno */
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -368,7 +362,6 @@ body {
     background: var(--modal-bg);
     border-radius: 16px;
     width: 700px;
-    /* más ancho */
     max-width: 90%;
     padding: 20px;
 
@@ -395,11 +388,9 @@ body {
     justify-content: space-between;
     align-items: center;
     background: var(--color-principal);
-    /* color principal */
     color: var(--text-white);
     padding: 15px 20px;
     border-radius: 16px 16px 0 0;
-    /* esquinas solo arriba */
 }
 
 .modal-header h2 {
