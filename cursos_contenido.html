@@ -1,0 +1,68 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h2>Cursos Registrados</h2>
+
+        <button id="btnNuevoCurso" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            Registrar Nuevo
+        </button>
+
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Curso</th>
+                <th>Descripción</th>
+                <th>Horas / Semana</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaCursos">
+        </tbody>
+    </table>
+
+    <div class="card-footer">
+        <p>Mostrando 2 de 50 registros</p>
+    </div>
+</div>
+
+<div id="modalCurso" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitulo">Registrar Nuevo Curso</h2>
+            <i class="fa-solid fa-xmark btn-cerrar-modal"></i>
+        </div>
+
+        <form id="formCurso">
+
+            <input type="hidden" id="id_curso" name="id_curso">
+            <input type="hidden" id="opcion" name="opcion" value="1">
+
+            <div class="form-grid">
+
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del Curso" required>
+
+                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del Curso">
+
+                <input type="number" id="horas" name="horas" placeholder="Horas por semana" required>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary btn-cerrar-modal">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                    Guardar Datos
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
