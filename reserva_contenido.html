@@ -12,8 +12,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID Alumno</th>
-                <th>ID Aula</th>
+                <th>Alumno</th>
+                <th>Aula</th>
                 <th>Código Pago</th>
                 <th>Fecha Reserva</th>
                 <th>Estado Pago</th>
@@ -23,4 +23,54 @@
 
         <tbody id="tablaReservas"></tbody>
     </table>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div id="modalReserva" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 id="modalTitulo">Registrar Reserva</h2>
+            <i class="fa-solid fa-xmark btn-cerrar-modal"></i>
+        </div>
+
+        <form id="formReserva">
+
+            <input type="hidden" id="id_reserva" name="id_reserva">
+            <input type="hidden" id="opcion" name="opcion" value="1">
+
+            <div class="form-grid">
+
+                <select id="id_alumno" name="id_alumno" placeholder="Alumno" required></select>
+
+                <select id="id_aula" name="id_aula" placeholder="Aula" required></select>
+
+                <input type="text" id="codigo_pago" name="codigo_pago" placeholder="Código Pago" required>
+
+                <select id="estado_pago" name="estado_pago">
+
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="PAGADO">Pagado</option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary btn-cerrar-modal">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                    Guardar Datos
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 </div>

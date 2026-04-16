@@ -82,9 +82,41 @@ echo json_encode([
 break;
 
 
-case '4': // LISTAR
+case '4':
 
-$sql = "SELECT * FROM RESERVA";
+$sql = "SELECT 
+r.ID_RESERVA,
+CONCAT(a.NOMBRES,' ',a.APELLIDOS) AS ALUMNO,
+CONCAT(au.NIVEL,' ',au.GRADO,'° ',au.SECCION) AS AULA,
+r.CODIGO_PAGO,
+r.FECHA_RESERVA,
+r.ESTADO_PAGO
+FROM RESERVA r
+LEFT JOIN ALUMNO a ON r.ID_ALUMNO = a.ID_ALUMNO
+LEFT JOIN AULA au ON r.ID_AULA = au.ID_AULA
+ORDER BY r.ID_RESERVA DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo json_encode($reservas);
+
+break;case '4':
+
+$sql = "SELECT 
+r.ID_RESERVA,
+CONCAT(a.NOMBRES,' ',a.APELLIDOS) AS ALUMNO,
+CONCAT(au.NIVEL,' ',au.GRADO,'° ',au.SECCION) AS AULA,
+r.CODIGO_PAGO,
+r.FECHA_RESERVA,
+r.ESTADO_PAGO
+FROM RESERVA r
+LEFT JOIN ALUMNO a ON r.ID_ALUMNO = a.ID_ALUMNO
+LEFT JOIN AULA au ON r.ID_AULA = au.ID_AULA
+ORDER BY r.ID_RESERVA DESC";
+
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -94,6 +126,58 @@ echo json_encode($reservas);
 
 break;
 
+case '5':
+
+$sql = "SELECT ID_ALUMNO, NOMBRES, APELLIDOS 
+        FROM ALUMNO 
+        WHERE ESTADO = 'A'
+        ORDER BY NOMBRES ASC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$html = '<option value="">Seleccionar Alumno</option>';
+
+foreach ($resultado as $row) {
+
+$html .= '<option value="'.$row['ID_ALUMNO'].'">'
+       .$row['NOMBRES'].' '.$row['APELLIDOS'].
+       '</option>';
+
+}
+
+echo $html;
+
+break;
+
+case '6':
+
+$sql = "SELECT 
+ID_AULA,
+CONCAT(NIVEL,' ',GRADO,'° ',SECCION) AS AULA
+FROM AULA
+ORDER BY NIVEL, GRADO, SECCION";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$html = '<option value="">Seleccionar Aula</option>';
+
+foreach ($resultado as $row) {
+
+$html .= '<option value="'.$row['ID_AULA'].'">'
+       .$row['AULA'].
+       '</option>';
+
+}
+
+echo $html;
+
+break;
 
 default:
 

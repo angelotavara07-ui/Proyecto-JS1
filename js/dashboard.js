@@ -32,6 +32,7 @@ $(document).ready(function () {
                 $('#moduloEstudiantes').hide();
                 $('#moduloPagos').hide();
                 $('#moduloCursos').hide();
+                $('#moduloMatricula').hide();
                 $('#moduloDashboard').fadeIn();
                 cargarDatosDashboard();
             }
@@ -39,6 +40,7 @@ $(document).ready(function () {
                 $('#moduloDashboard').hide();
                 $('#moduloPagos').hide();
                 $('#moduloCursos').hide();
+                $('#moduloMatricula').hide();
                 $('#moduloEstudiantes').fadeIn();
                 cargarAlumnos();
             }
@@ -46,6 +48,7 @@ $(document).ready(function () {
                 $('#moduloDashboard').hide();
                 $('#moduloEstudiantes').hide();
                 $('#moduloPagos').hide();
+                $('#moduloMatricula').hide();
                 $('#moduloCursos').load("cursos_contenido.html", function () {
                     $.getScript("js/cursos.js");
                     $('#moduloCursos').fadeIn();
@@ -56,9 +59,20 @@ $(document).ready(function () {
                 $('#moduloDashboard').hide();
                 $('#moduloEstudiantes').hide();
                 $('#moduloCursos').hide();
+                $('#moduloMatricula').hide();
                 $('#moduloPagos').load("reserva_contenido.html", function () {
                     $('#moduloPagos').fadeIn();
                     $.getScript("js/reserva.js");
+                });
+            }
+            else if (modulo === 'matricula') {
+                $('#moduloDashboard').hide();
+                $('#moduloEstudiantes').hide();
+                $('#moduloCursos').hide();
+                $('#moduloPagos').hide();
+                $('#moduloMatricula').load("matricula_contenido.html", function () {
+                    $.getScript("js/matricula.js");
+                    $('#moduloMatricula').fadeIn();
                 });
             }
             else {
@@ -157,7 +171,7 @@ $(document).ready(function () {
     // 1. ABRIR MODAL PARA NUEVO REGISTRO
     $('#btnNuevo').on('click', function () {
         $('#formAlumno')[0].reset();
-        $('#opcion').val('1');
+        $('#formAlumno input[name="opcion"]').val('1');
         $('#modalTitulo').text('Registrar Nuevo Alumno');
         $('#password').attr('required', true);
         $('#modalAlumno').fadeIn();
@@ -203,7 +217,7 @@ $(document).ready(function () {
 
 
     // 4. ELIMINAR
-    $(document).on('click', '.fa-trash', function () {
+    $(document).on('click', '#tablaAlumnos .fa-trash', function () {
 
         let fila = $(this).closest('tr');
         let idAlumno = fila.find('td:eq(0)').text();
@@ -244,7 +258,7 @@ $(document).ready(function () {
     });
 
     // 5. EDITAR
-    $(document).on('click', '.fa-pen-to-square', function () {
+    $(document).on('click', '#tablaAlumnos .fa-pen-to-square', function () {
 
         let fila = $(this).closest('tr');
 
@@ -289,7 +303,7 @@ $(document).ready(function () {
             $('#estado').val('P');
         }
 
-        $('#opcion').val('2');
+        $('#formAlumno input[name="opcion"]').val('2');
         $('#modalTitulo').text('Editar Alumno');
         $('#password').removeAttr('required');
 

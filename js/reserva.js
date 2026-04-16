@@ -15,9 +15,14 @@ $(document).ready(function () {
 
     // 1. ABRIR MODAL
     $('#btnNuevaReserva').on('click', function () {
+
         $('#formReserva')[0].reset();
         $('#opcion').val('1');
         $('#modalTitulo').text('Registrar Nueva Reserva');
+
+        cargarAlumnos();
+        cargarAulas();
+
         $('#modalReserva').fadeIn();
     });
 
@@ -44,7 +49,9 @@ $(document).ready(function () {
 
                     Swal.fire('¡Éxito!', respuesta.mensaje, 'success')
                         .then(() => {
-                            location.reload();
+                            $('#modalReserva').fadeOut();
+                            cargarReservas();
+
                         });
 
                 } else {
@@ -59,7 +66,7 @@ $(document).ready(function () {
 
 
     // 4. ELIMINAR
-    $(document).on('click', '.fa-trash', function () {
+    $(document).on('click', '#tablaReservas .fa-trash', function () {
 
         let fila = $(this).closest('tr');
         let idReserva = fila.find('td:eq(0)').text();
@@ -101,7 +108,7 @@ $(document).ready(function () {
 
 
     // 5. EDITAR
-    $(document).on('click', '.fa-pen-to-square', function () {
+    $(document).on('click', '#tablaReservas .fa-pen-to-square', function () {
 
         let fila = $(this).closest('tr');
 
@@ -127,6 +134,38 @@ $(document).ready(function () {
     });
 
 
+    // CARGAR ALUMNOS
+    function cargarAlumnos() {
+
+        $.ajax({
+            url: "php/crud_reserva.php",
+            type: "POST",
+            data: { opcion: 5 },
+            dataType: "html",
+
+            success: function (data) {
+                $('#id_alumno').html(data);
+            }
+        });
+
+    }
+
+
+    // CARGAR AULAS
+    function cargarAulas() {
+
+        $.ajax({
+            url: "php/crud_reserva.php",
+            type: "POST",
+            data: { opcion: 6 },
+            dataType: "html",
+
+            success: function (data) {
+                $('#id_aula').html(data);
+            }
+        });
+
+    }
 
     // CARGAR TABLA
     function cargarReservas() {
@@ -164,8 +203,8 @@ $(document).ready(function () {
                     let fila = `
                     <tr>
                     <td>${reserva.ID_RESERVA}</td>
-                    <td>${reserva.ID_ALUMNO}</td>
-                    <td>${reserva.ID_AULA}</td>
+                    <td>${reserva.ALUMNO}</td>
+                    <td>${reserva.AULA}</td>
                     <td>${reserva.CODIGO_PAGO}</td>
                     <td>${reserva.FECHA_RESERVA}</td>
 

@@ -44,7 +44,9 @@ $(document).ready(function () {
 
                     Swal.fire('¡Éxito!', respuesta.mensaje, 'success')
                         .then(() => {
-                            location.reload();
+                            $('#modalCurso').fadeOut();
+                            cargarCursos();
+
                         });
 
                 } else {
@@ -61,7 +63,7 @@ $(document).ready(function () {
 
 
     // 4. ELIMINAR
-    $(document).on('click', '.fa-trash', function () {
+    $(document).on('click', '#tablaCursos .fa-trash', function () {
 
         let fila = $(this).closest('tr');
         let idCurso = fila.find('td:eq(0)').text();
@@ -102,7 +104,7 @@ $(document).ready(function () {
     });
 
     // 5. EDITAR
-    $(document).on('click', '.fa-pen-to-square', function () {
+    $(document).on('click', '#tablaCursos .fa-pen-to-square', function () {
 
         let fila = $(this).closest('tr');
 

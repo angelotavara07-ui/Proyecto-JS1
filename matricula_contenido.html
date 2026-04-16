@@ -1,0 +1,70 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h2>Matrículas Registradas</h2>
+
+        <button id="btnNuevaMatricula" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            Registrar Matrícula
+        </button>
+
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Alumno</th>
+                <th>Curso</th>
+                <th>Fecha Inscripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaMatricula">
+        </tbody>
+    </table>
+
+    <div class="card-footer">
+        <p>Registros de Matrícula</p>
+    </div>
+</div>
+
+<div id="modalMatricula" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTituloMatricula">Registrar Matrícula</h2>
+            <i class="fa-solid fa-xmark btn-cerrar-modal-matricula"></i>
+        </div>
+
+        <form id="formMatricula">
+
+            <input type="hidden" id="id_matricula" name="id_matricula">
+            <input type="hidden" id="opcionMatricula" name="opcion" value="1">
+
+            <div class="form-grid">
+
+                <select id="id_alumno" name="id_alumno" required>
+                    <option value="">Seleccionar Alumno</option>
+                </select>
+
+                <select id="id_curso" name="id_curso" required>
+                    <option value="">Seleccionar Curso</option>
+                </select>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary btn-cerrar-modal-matricula">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                    Guardar Matrícula
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
